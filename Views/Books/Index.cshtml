@@ -1,0 +1,43 @@
+@model IEnumerable<LibraryApp.Models.Book>
+
+@{
+    ViewData["Title"] = "Lista de Libros";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary">Agregar Nuevo Libro</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>ISBN</th>
+            <th>Género</th>
+            <th>Fecha de Publicación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.ISBN</td>
+                <td>@book.Genre</td>
+                <td>@book.PublishedDate.ToShortDateString()</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = book.Id })">Detalles</a> |
+                    <a href="@Url.Action("Edit", new { id = book.Id })">Editar</a> |
+                    <a href="@Url.Action("Delete", new { id = book.Id })">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
